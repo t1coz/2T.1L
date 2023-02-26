@@ -55,7 +55,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         getStr(&temporaryFillingArray);
         (*boilers)[i].typeOfSolidFuel = malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].typeOfSolidFuel){
-            strcpy_s((*boilers)[i].typeOfSolidFuel, strLen((*boilers)[i].typeOfSolidFuel),temporaryFillingArray);
+            strcpy_s((*boilers)[i].typeOfSolidFuel, strlen((*boilers)[i].typeOfSolidFuel),temporaryFillingArray);
         }
         free(temporaryFillingArray);
     }
@@ -93,7 +93,8 @@ void addNewBoiler(Boiler** boilers, const int* num){
     }
     free(temporaryFillingArray);
 }
-void showTheNumberOfElements(int num){
+void showTheNumberOfElements(Boiler* boilers, int num){
+    boilers->numberOfLoops = num;
     printf("\n\033[0;33mNumber of elements: %d.\033[0m\n", num);
 }
 void removingElement(Boiler** boilers, int* num, int position){

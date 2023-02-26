@@ -9,6 +9,7 @@ typedef enum{
 }NumberOfLoops;
 
 typedef struct {
+    int numberOfElementsInArray;
     char* name;
     NumberOfLoops numberOfLoops;
     int heatingArea;
@@ -23,7 +24,7 @@ void addNewBoiler(Boiler** boilers, const int* num);
 void addNewNumberOfBoilers(Boiler** boilers, int num);
 void removingElement(Boiler** boilers, int* num, int position);
 
-void showTheNumberOfElements(int num);
+void showTheNumberOfElements(Boiler* boilers, int num);
 //sort
 int compare(const Boiler* f1, const Boiler* f2, int field1, int field2);
 void shellSort(Boiler* boilers, int n, int field1, int field2);
