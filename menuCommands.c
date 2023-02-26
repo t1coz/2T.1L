@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-__attribute__((noreturn)) void menuInterface(Boiler** boilers, int* number){
+void menuInterface(Boiler** boilers, int* number){
     void (*ptrMenu[])(Boiler**, int*) = {task1NewElement, task2RemoveElement,
                                          task3SortByTwo, task4Print, task5ShowTheNumberOfElements, task6Initialization};
     int choice;
