@@ -1,6 +1,5 @@
 #include "menuCommands.h"
 #include "boilers.h"
-//#include <stdlib.h>
 void task1NewElement(Boiler** boilers, int* number){
     resizeStruct(boilers, number);
     addNewBoiler(boilers, number);

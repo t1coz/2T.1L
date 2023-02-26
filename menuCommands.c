@@ -33,7 +33,7 @@ void menuInterface(Boiler** boilers, int* number){
 }
 int methodOfInput(int size){
     float num;
-    while (scanf("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)&& (int)num != 99) || getchar() != '\n') {
+    while (scanf_s("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)&& (int)num != 99) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
@@ -41,7 +41,7 @@ int methodOfInput(int size){
 }
 int methodOfInputChoice(int size){
     float num;
-    while (scanf("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)) || getchar() != '\n') {
+    while (scanf_s("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
@@ -49,7 +49,7 @@ int methodOfInputChoice(int size){
 }
 double methodOfInputDouble(){
     double num;
-    while (scanf("%lf", &num) != 1 || num <=0 || getchar() != '\n') {
+    while (scanf_s("%lf", &num) != 1 || num <=0 || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
@@ -57,7 +57,7 @@ double methodOfInputDouble(){
 }
 int methodOfInputInt(){
     int num;
-    while (scanf("%d", &num) != 1 || num <=0 || getchar() != '\n') {
+    while (scanf_s("%d", &num) != 1 || num <=0 || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
@@ -65,11 +65,18 @@ int methodOfInputInt(){
 }
 float methodOfInputFloat(){
     float num;
-    while (scanf("%f", &num) != 1 || num <=0 ||getchar() != '\n') {
+    while (scanf_s("%f", &num) != 1 || num <=0 ||getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
     return num;
+}
+int strLen(const char* str){
+    int i=0;
+    while (str[i]!='\0'){
+        i++;
+    }
+    return i;
 }
 void getStr(char **string){
     int size = 0;

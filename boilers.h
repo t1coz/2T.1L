@@ -25,7 +25,7 @@ void removingElement(Boiler** boilers, int* num, int position);
 
 void showTheNumberOfElements(int num);
 //sort
-int compare(Boiler* f1, Boiler* f2, int field1, int field2);
+int compare(const Boiler* f1, const Boiler* f2, int field1, int field2);
 void shellSort(Boiler* boilers, int n, int field1, int field2);
 
 void printBoilers(Boiler** boilers, const int* num);

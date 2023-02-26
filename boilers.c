@@ -33,7 +33,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         getStr(&temporaryFillingArray);
         (*boilers)[i].name = (char*)malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].name){
-            strcpy((*boilers)[i].name, temporaryFillingArray);
+            strcpy_s((*boilers)[i].name, strLen((*boilers)[i].name),temporaryFillingArray);
         }
         printf("Number of loops: (1 OR 2): ");
         int loops = methodOfInput(2);
@@ -55,7 +55,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         getStr(&temporaryFillingArray);
         (*boilers)[i].typeOfSolidFuel = malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].typeOfSolidFuel){
-            strcpy((*boilers)[i].typeOfSolidFuel, temporaryFillingArray);
+            strcpy_s((*boilers)[i].typeOfSolidFuel, strLen((*boilers)[i].typeOfSolidFuel),temporaryFillingArray);
         }
         free(temporaryFillingArray);
     }
@@ -67,7 +67,7 @@ void addNewBoiler(Boiler** boilers, const int* num){
     getStr(&temporaryFillingArray);
     (*boilers)[lastIndex].name = (char*)malloc(strlen(temporaryFillingArray) + 1);
     if((*boilers)[lastIndex].name){
-        strcpy((*boilers)[lastIndex].name, temporaryFillingArray);
+        strcpy_s((*boilers)[lastIndex].name, strLen((*boilers)[lastIndex].name),temporaryFillingArray);
     }
     printf("Number of loops: (1 OR 2): ");
     int loops = methodOfInput(2);
@@ -89,7 +89,7 @@ void addNewBoiler(Boiler** boilers, const int* num){
     getStr(&temporaryFillingArray);
     (*boilers)[lastIndex].typeOfSolidFuel = malloc(strlen(temporaryFillingArray) + 1);
     if((*boilers)[lastIndex].typeOfSolidFuel){
-        strcpy((*boilers)[lastIndex].typeOfSolidFuel, temporaryFillingArray);
+        strcpy_s((*boilers)[lastIndex].typeOfSolidFuel, strLen((*boilers)[lastIndex].typeOfSolidFuel), temporaryFillingArray);
     }
     free(temporaryFillingArray);
 }
@@ -103,7 +103,7 @@ void removingElement(Boiler** boilers, int* num, int position){
     (*num)--;
     *boilers = (Boiler*)realloc((*boilers), (*num) * sizeof(Boiler));
 }
-int compare(Boiler* f1, Boiler* f2, int field1, int field2){
+int compare(const Boiler* f1, const Boiler* f2, int field1, int field2){
     if (field1 == 1){
         if (strcmp(f1->name, f2->name) < 0){
             return -1;
@@ -203,10 +203,10 @@ int compare(Boiler* f1, Boiler* f2, int field1, int field2){
     return 0;
 }
 void shellSort(Boiler* boilers, int n, int field1, int field2){
-    int gap, i, j;
+    int j;
     Boiler temp;
-    for (gap = n / 2; gap > 0; gap /= 2){
-        for (i = gap; i < n; i++){
+    for (int gap = n / 2; gap > 0; gap /= 2){
+        for (int i = gap; i < n; i++){
             temp = boilers[i];
             for (j = i; j >= gap && compare(&boilers[j - gap], &temp, field1, field2) > 0; j -= gap){
                 boilers[j] = boilers[j - gap];

@@ -12,6 +12,7 @@ int methodOfInputInt();
 float methodOfInputFloat();
 int methodOfInputChoice(int size);
 void getStr(char **string);
+int strLen(const char* str);
 
 //tasks
 void task1NewElement(Boiler** boilers, int* number);
