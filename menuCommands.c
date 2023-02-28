@@ -32,16 +32,16 @@ void menuInterface(Boiler** boilers, int* number){
     }
 }
 int methodOfInput(int size){
-    float num;
-    while (scanf("%f", &num) != 1 || (!(num >=1 && num <=size)&& num != 99) || getchar() != '\n') {
+    int num;
+    while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)&& num != 99) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
     return num;
 }
 int methodOfInputChoice(int size){
-    float num;
-    while (scanf("%f", &num) != 1 || (!(num >=1 && num <=size)) || getchar() != '\n') {
+    int num;
+    while (scanf("%d", &num) != 1 || (!(num >=1 && num <=size)) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
