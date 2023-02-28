@@ -9,7 +9,6 @@ typedef enum{
 }NumberOfLoops;
 
 typedef struct {
-    int numberOfElementsInArray;
     char* name;
     NumberOfLoops numberOfLoops;
     int heatingArea;

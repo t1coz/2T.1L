@@ -98,7 +98,7 @@ void getStr(char **string){
     rewind(stdin);
     char check;
     while (true) {
-        check = getchar();
+        check = (char)getchar();
         if (check == '\n') {
             if (size + 1 < realSize) {
                 *string = (char *) realloc(*string, (size + 1) * sizeof(char));
