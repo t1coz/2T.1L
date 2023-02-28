@@ -123,7 +123,7 @@ int compare(const Boiler* f1, const Boiler* f2, int field1, int field2){
     else if (field1 == 6 && (f1->typeOfSolidFuel > f2->typeOfSolidFuel)){
         return 1;
     }
-    if (field2 == 1 && ((strcmp(f1->name, f2->name) > 0))){
+    if (field2 == 1 && (strcmp(f1->name, f2->name) > 0)){
         return 1;
     }
     else if (field2 == 2 && (f1->numberOfLoops > f2->numberOfLoops)){
