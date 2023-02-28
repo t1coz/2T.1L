@@ -106,98 +106,62 @@ void removingElement(Boiler** boilers, int* num, int position){
 }
 int compare(const Boiler* f1, const Boiler* f2, int field1, int field2){
     if (field1 == 1){
-        if (strcmp(f1->name, f2->name) < 0){
-            return -1;
-        }
-        else if (strcmp(f1->name, f2->name) > 0){
+        if (strcmp(f1->name, f2->name) > 0){
             return 1;
         }
     }
     else if (field1 == 2){
-        if (f1->numberOfLoops < f2->numberOfLoops){
-            return -1;
-        }
-        else if (f1->numberOfLoops > f2->numberOfLoops){
+         if (f1->numberOfLoops > f2->numberOfLoops){
             return 1;
         }
     }
     else if (field1 == 3){
-        if (f1->heatingArea < f2->heatingArea){
-            return -1;
-        }
-        else if (f1->heatingArea > f2->heatingArea){
+        if (f1->heatingArea > f2->heatingArea){
             return 1;
         }
     }
     else if (field1 == 4){
-        if (f1->thermalPower < f2->thermalPower){
-            return -1;
-        }
-        else if (f1->thermalPower > f2->thermalPower){
+        if (f1->thermalPower > f2->thermalPower){
             return 1;
         }
     }
     else if (field1 == 5){
-        if (f1->depth < f2->depth){
-            return -1;
-        }
-        else if (f1->depth > f2->depth){
+        if (f1->depth > f2->depth){
             return 1;
         }
     }
     else if (field1 == 6){
-        if (f1->typeOfSolidFuel < f2->typeOfSolidFuel){
-            return -1;
-        }
-        else if (f1->typeOfSolidFuel > f2->typeOfSolidFuel){
+        if (f1->typeOfSolidFuel > f2->typeOfSolidFuel){
             return 1;
         }
     }
     if (field2 == 1){
-        if (strcmp(f1->name, f2->name) < 0){
-            return -1;
-        }
-        else if (strcmp(f1->name, f2->name) > 0){
+        if (strcmp(f1->name, f2->name) > 0){
             return 1;
         }
     }
     else if (field2 == 2){
-        if (f1->numberOfLoops < f2->numberOfLoops){
-            return -1;
-        }
-        else if (f1->numberOfLoops > f2->numberOfLoops){
+        if (f1->numberOfLoops > f2->numberOfLoops){
             return 1;
         }
     }
     else if (field2 == 3){
-        if (f1->heatingArea < f2->heatingArea){
-            return -1;
-        }
-        else if (f1->heatingArea > f2->heatingArea){
+        if (f1->heatingArea > f2->heatingArea){
             return 1;
         }
     }
     else if (field2 == 4){
-        if (f1->thermalPower < f2->thermalPower){
-            return -1;
-        }
-        else if (f1->thermalPower > f2->thermalPower){
+        if (f1->thermalPower > f2->thermalPower){
             return 1;
         }
     }
     else if (field2 == 5){
-        if (f1->depth < f2->depth){
-            return -1;
-        }
-        else if (f1->depth > f2->depth){
+        if (f1->depth > f2->depth){
             return 1;
         }
     }
     else if (field2 == 6){
-        if (f1->typeOfSolidFuel < f2->typeOfSolidFuel){
-            return -1;
-        }
-        else if (f1->typeOfSolidFuel > f2->typeOfSolidFuel){
+        if (f1->typeOfSolidFuel > f2->typeOfSolidFuel){
             return 1;
         }
     }
