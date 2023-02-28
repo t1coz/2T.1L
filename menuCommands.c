@@ -33,7 +33,7 @@ void menuInterface(Boiler** boilers, int* number){
 }
 int methodOfInput(int size){
     float num;
-    while (scanf("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)&& (int)num != 99) || getchar() != '\n') {
+    while (scanf("%f", &num) != 1 || (!(num >=1 && num <=size)&& num != 99) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
@@ -41,7 +41,7 @@ int methodOfInput(int size){
 }
 int methodOfInputChoice(int size){
     float num;
-    while (scanf("%f", &num) != 1 || num != (int)num || (!((int)num >=1 && (int)num <=size)) || getchar() != '\n') {
+    while (scanf("%f", &num) != 1 || (!(num >=1 && num <=size)) || getchar() != '\n') {
         printf("Try better:\n");
         rewind(stdin);
     }
