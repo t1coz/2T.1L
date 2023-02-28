@@ -3,13 +3,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
-
-void menuInterface(Boiler** boilers, int* number){
-    void (*ptrMenu[])(Boiler**, int*) = {task1NewElement, task2RemoveElement,
-                                         task3SortByTwo, task4Print, task5ShowTheNumberOfElements, task6Initialization};
-    int choice;
+void menuInterface(){
+    int number = 0;
+    Boiler* boilers = NULL;
     while(1){
-        if(*number==0){
+        if(number==0){
             printf("\n\033[0;31mThere is no elements in the structure yet.\033[0m\n");
         }
         printf("\n\033[0;31mChoose what to do with the structure:\033[0m"
@@ -19,16 +17,38 @@ void menuInterface(Boiler** boilers, int* number){
                "\n4. Print all the elements."
                "\n5. Show the number of elements."
                "\n6. Initialize the struct."
-               //"\n7. Sort by ONE characteristic."
                "\n\033[0;33m(Type 99 to exit the program)\033[0m\n"
                "\n\033[0;32mDecision: \033[0m");
-        choice = methodOfInput(sizeof(ptrMenu)/sizeof(ptrMenu[0]));
+        int choice;
+        choice = methodOfInput(6);
         if (choice == 99){
             printf("\n\033[0;31mFinishing the program.\n\033[0m");
-            freeStructAndArray(boilers, *number);
+            freeStructAndArray(&boilers, number);
             exit(0);
         }
-        ptrMenu[choice-1](boilers, number);
+        switch (choice) {
+            case 1:
+                task1NewElement(&boilers, &number);
+                break;
+            case 2:
+                task2RemoveElement(&boilers, &number);
+                break;
+            case 3:
+                task3SortByTwo(&boilers, &number);
+                break;
+            case 4:
+                task4Print(&boilers, &number);
+                break;
+            case 5:
+                task5ShowTheNumberOfElements(&number);
+                break;
+            case 6:
+                task6Initialization(&boilers, &number);
+                break;
+            default:
+                freeStructAndArray(&boilers, number);
+                return;
+        }
     }
 }
 int methodOfInput(int size){

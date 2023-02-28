@@ -15,7 +15,7 @@ void task2RemoveElement(Boiler** boilers, int* number){
         printf("There's nothing to remove.\n");
     }
 }
-void task3SortByTwo(Boiler** boilers, int* number){
+void task3SortByTwo(Boiler** boilers, const int* number){
     int choice1;
     int choice2;
     printf("\nEnter the field(1-6):\n"
@@ -32,11 +32,11 @@ void task3SortByTwo(Boiler** boilers, int* number){
     shellSort(*boilers, *number, choice1, choice2);
     printBoilers(boilers, number);
 }
-void task4Print(Boiler** boilers, int* number){
+void task4Print(Boiler** boilers, const int* number){
     printBoilers(boilers, number);
 }
-void task5ShowTheNumberOfElements(Boiler** boilers, int* number){
-    showTheNumberOfElements(*boilers, *number);
+void task5ShowTheNumberOfElements(const int* number){
+    showTheNumberOfElements(*number);
 }
 void task6Initialization(Boiler** boilers, int* number){
     printf("How many elements would you like to add?: ");

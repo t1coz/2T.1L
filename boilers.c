@@ -93,8 +93,7 @@ void addNewBoiler(Boiler** boilers, const int* num){
     }
     free(temporaryFillingArray);
 }
-void showTheNumberOfElements(Boiler* boilers, int num){
-    boilers->numberOfLoops = num;
+void showTheNumberOfElements(int num){
     printf("\n\033[0;33mNumber of elements: %d.\033[0m\n", num);
 }
 void removingElement(Boiler** boilers, int* num, int position){
