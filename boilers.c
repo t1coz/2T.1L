@@ -33,7 +33,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         getStr(&temporaryFillingArray);
         (*boilers)[i].name = (char*)malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].name){
-            strcpy_s((*boilers)[i].name, strLen((*boilers)[i].name),temporaryFillingArray);
+            strcpy((*boilers)[i].name,temporaryFillingArray);
         }
         printf("Number of loops: (1 OR 2): ");
         int loops = methodOfInput(2);
@@ -55,7 +55,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         getStr(&temporaryFillingArray);
         (*boilers)[i].typeOfSolidFuel = malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].typeOfSolidFuel){
-            strcpy_s((*boilers)[i].typeOfSolidFuel, strlen((*boilers)[i].typeOfSolidFuel),temporaryFillingArray);
+            strcpy((*boilers)[i].typeOfSolidFuel, temporaryFillingArray);
         }
         free(temporaryFillingArray);
     }
@@ -67,7 +67,7 @@ void addNewBoiler(Boiler** boilers, const int* num){
     getStr(&temporaryFillingArray);
     (*boilers)[lastIndex].name = (char*)malloc(strlen(temporaryFillingArray) + 1);
     if((*boilers)[lastIndex].name){
-        strcpy_s((*boilers)[lastIndex].name, strLen((*boilers)[lastIndex].name),temporaryFillingArray);
+        strcpy((*boilers)[lastIndex].name, temporaryFillingArray);
     }
     printf("Number of loops: (1 OR 2): ");
     int loops = methodOfInput(2);
@@ -89,7 +89,7 @@ void addNewBoiler(Boiler** boilers, const int* num){
     getStr(&temporaryFillingArray);
     (*boilers)[lastIndex].typeOfSolidFuel = malloc(strlen(temporaryFillingArray) + 1);
     if((*boilers)[lastIndex].typeOfSolidFuel){
-        strcpy_s((*boilers)[lastIndex].typeOfSolidFuel, strLen((*boilers)[lastIndex].typeOfSolidFuel), temporaryFillingArray);
+        strcpy((*boilers)[lastIndex].typeOfSolidFuel, temporaryFillingArray);
     }
     free(temporaryFillingArray);
 }
