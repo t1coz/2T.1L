@@ -1,6 +1,5 @@
 #include "menuCommands.h"
 #include "boilers.h"
-//#include <stdlib.h>
 void task1NewElement(Boiler** boilers, int* number){
     resizeStruct(boilers, number);
     addNewBoiler(boilers, number);
@@ -17,7 +16,8 @@ void task2RemoveElement(Boiler** boilers, int* number){
     }
 }
 void task3SortByTwo(Boiler** boilers, int* number){
-    int choice1, choice2;
+    int choice1;
+    int choice2;
     printf("\nEnter the field(1-6):\n"
            "1. Name;\n"
            "2. Number of loops;\n"
