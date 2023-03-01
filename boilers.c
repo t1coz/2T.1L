@@ -16,12 +16,12 @@ void printBoilers(Boiler** boilers, const int* num){
         printf("\n\033[0;33mThere is no elements in the struct.\033[0m\n");
     }else{
         for(int i=0; i<(*num); i++){
-            printf("\n\033[0;34m%d.\033[0m Name: %s.\n", i+1, (*boilers)[i].name);
+            printf("\n\033[0;34m%d. Name: %s.\033[0m\n", i+1, (*boilers)[i].name);
             printf("Number of loops: %d.\n", (*boilers)[i].numberOfLoops);
-            printf("Thermal power: %.2lf.\n", (*boilers)[i].thermalPower);
-            printf("Heating area: %d.\n", (*boilers)[i].heatingArea);
-            printf("Depth: %.2f.\n", (*boilers)[i].depth);
-            printf("Type of solid fuel: %s.\n", (*boilers)[i].typeOfSolidFuel);
+            printf("Thermal power: %.2lf kw.\n", (*boilers)[i].thermalPower);
+            printf("Heating area: %d m^2.\n", (*boilers)[i].heatingArea);
+            printf("Depth: %.2f cm.\n", (*boilers)[i].depth);
+            printf("Type of fuel: %s.\n", (*boilers)[i].typeOfSolidFuel);
         }
     }
 }
@@ -51,7 +51,7 @@ void addNewNumberOfBoilers(Boiler** boilers, int num){
         float depth = methodOfInputFloat();
         (*boilers)[i].depth = depth;
 
-        printf("Type of solid fuel: ");
+        printf("Type of fuel: ");
         getStr(&temporaryFillingArray);
         (*boilers)[i].typeOfSolidFuel = malloc(strlen(temporaryFillingArray)+1);
         if((*boilers)[i].typeOfSolidFuel){
@@ -119,7 +119,7 @@ int compare(const Boiler* f1, const Boiler* f2, int field1, int field2){
     else if (field1 == 5 && (f1->depth > f2->depth)){
         return 1;
     }
-    else if (field1 == 6 && (f1->typeOfSolidFuel > f2->typeOfSolidFuel)){
+    else if (field1 == 6 && (strcmp(f1->typeOfSolidFuel, f2->typeOfSolidFuel)>0)){
         return 1;
     }
     if (field2 == 1 && (strcmp(f1->name, f2->name) > 0)){
@@ -137,7 +137,7 @@ int compare(const Boiler* f1, const Boiler* f2, int field1, int field2){
     else if (field2 == 5 && (f1->depth > f2->depth)){
         return 1;
     }
-    else if (field2 == 6 && (f1->typeOfSolidFuel > f2->typeOfSolidFuel)){
+    else if (field2 == 6 && (strcmp(f1->typeOfSolidFuel, f2->typeOfSolidFuel)>0)){
         return 1;
     }
     return 0;
