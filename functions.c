@@ -27,14 +27,12 @@ void getStr(char **string){
 int cycleWord(const char *token, char *temp){
     int i = 0;
     for (int j = 0; token[j]; j++){
-    //if (isalnum(token[j])){
         temp[i++] = (char)tolower(token[j]);
-    //}
     }
     temp[i] = '\0';
     return i;
 }
-void readFile(struct Unit *unit, char *filePath){
+void readFile(struct Unit *unit, const char *filePath){
     FILE *textFile = fopen(filePath, "r");
     if (textFile == NULL) {
         printf("textFile is NULL.\n");
@@ -197,37 +195,5 @@ int strangeCompression(const char *filePath, const char *word, const char *newWo
     }
     fclose(initialFile);
     fclose(compressedFile);
-    return 0;
-}
-int decompression(const char *filePath){
-    FILE *oldFile = fopen("compressedFile.txt", "r");
-    FILE *newFile = fopen("decompressedFile.txt", "w");
-    if (oldFile == NULL || newFile == NULL) {
-        printf("Error during opening files in decompression.");
-        if (oldFile != NULL) {
-            fclose(oldFile);
-        }
-        if (newFile != NULL) {
-            fclose(newFile);
-        }
-        return 1;
-    }
-    char buffer[1000];
-    char word[100];
-    char newWord[100];
-    fscanf(oldFile, "%s", word);
-    fscanf(oldFile, "%s", newWord);
-    while (fgets(buffer, 1000, oldFile) != NULL) {
-        char *temp = (char *) calloc(1000, sizeof(char));
-        inputSpaces(buffer, temp, 1);
-        token(buffer, temp, newWord, word);
-        deleteSymbol(temp);
-        strcat(temp, "\n");
-        temp = (char *) realloc(temp, (strlen(temp) + 2) * sizeof(char));
-        fprintf(newFile, "%s", temp);
-        free(temp);
-    }
-    fclose(oldFile);
-    fclose(newFile);
     return 0;
 }
