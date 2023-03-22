@@ -1,4 +1,0 @@
-#ifndef INC_1LABA_PARSING_H
-#define INC_1LABA_PARSING_H
-
-#endif //INC_1LABA_PARSING_H
