@@ -192,6 +192,7 @@ char** fillingVocabulary(const char *filePath, struct Node *node, int *size){
         popNode(node, wordA);
         popNode(node, wordB);
     }
+    fclose(initialFile);
     return vocabularyWords;
 }
 int fileCompression(const char *fileName, struct Node *node){
@@ -228,6 +229,7 @@ int fileCompression(const char *fileName, struct Node *node){
         free(temp);
     }
     fclose(oldFile);
+    free(array);
     fclose(compressedFile);
     return 0;
 }
@@ -273,6 +275,7 @@ int fileDecompression(const char *compressedFilePath){
             free(temp);
         }
     }
+    free(vocabularyWords);
     fclose(compressedFile);
     fclose(decompressedFile);
     return 0;
