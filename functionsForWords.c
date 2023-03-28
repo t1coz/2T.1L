@@ -59,13 +59,6 @@ void popNode(struct Node *node, const char *wordRemove){
         neededToRemove = neededToRemove->next;
     }
 }
-void displayOccurrences(struct Node *node){
-    struct Words *word = node->head;
-    while (word != NULL) {
-        printf("%s %d\n", word->word, word->count);
-        word = word->next;
-    }
-}
 void freeList(struct Node *node){
     struct Words *current = node->head;
     while (current != NULL) {

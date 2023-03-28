@@ -167,7 +167,6 @@ char** fillingVocabulary(const char *filePath, struct Node *node, int *size){
     FILE *initialFile = fopen(filePath, "r");
     if (initialFile == NULL){
         printf("Opening error.");
-        fclose(initialFile);
         return NULL;
     }
     char* wordA;

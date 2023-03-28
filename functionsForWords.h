@@ -7,6 +7,5 @@
 void createNode(struct Node *node,const  char *buffer);
 void addNode(struct Node *node, const char *temp);
 void popNode(struct Node *node, const char *wordRemove);
-void displayOccurrences(struct Node *node);
 void freeList(struct Node *node);
 #endif

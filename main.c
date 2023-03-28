@@ -7,7 +7,6 @@ int main(){
     printf("Write INITIAL text file path: ");
     getStr(&filePath);
     readFile(&node, filePath);
-    //displayOccurrences(&node);
 
     fileCompression(filePath, &node);
     fileDecompression("compressedFile.txt");
