@@ -2,9 +2,7 @@
 #include "words.h"
 #include "functionsForWords.h"
 int main(){
-    char *filePath;
-    char* minLenWord;
-    char* maxLenWord;
+    char *filePath, *minLenWord, *maxLenWord;
     struct Unit unit = {0, NULL, NULL};
     printf("\033[0;31mBeginning of the program.\033[0m\n");
     printf("Write the file path: ");
@@ -17,3 +15,4 @@ int main(){
     strangeCompression(filePath, maxLenWord, minLenWord);
     deletingList(&unit);
     return 0;
+}
