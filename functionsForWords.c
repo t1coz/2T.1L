@@ -1,72 +1,55 @@
 #include "functionsForWords.h"
 #include "words.h"
-void createNode(struct Node *node,const  char *buffer){
-    struct Words *word = (struct Words*) malloc(sizeof(struct Words));
-    if (strlen(buffer) > 100){
-        free(word);
-        return;
-    }else{
+
+void createUnit(struct Unit *unit, const char *buffer){
+    struct Words *word = (struct Words *) malloc(sizeof(struct Words));
+    if (strlen(buffer) <= 50){
         strcpy(word->word, buffer);
+    }else{
+        free(word);
+        exit(0);
     }
     word->count = 1;
     word->next = NULL;
-    word->prev = node->tail;
-    if (node->head == NULL){
-        node->head = word;
-        node->tail = word;
+    word->last = unit->tail;
+    if (unit->head == NULL){
+        unit->head = word;
+        unit->tail = word;
     }else{
-        node->tail->next = word;
-        word->prev = node->tail;
-        node->tail = word;
+        unit->tail->next = word;
+        word->last = unit->tail;
+        unit->tail = word;
     }
-    node->size++;
+    unit->size++;
 }
-void addNode(struct Node *node, const char *temp){
-    struct Words *tempIterator = node->head;
-    while (tempIterator != NULL){
-        if (strcmp(tempIterator->word, temp) == 0){
-            tempIterator->count++;
+void newNode(struct Unit *unit, const char *temp){
+    struct Words *tempIteration = unit->head;
+    while (tempIteration != NULL) {
+        if (strcmp(tempIteration->word, temp) == 0){
+            tempIteration->count++;
             break;
         }
+        tempIteration = tempIteration->next;
+    }
+    if (tempIteration == NULL) {
+        createUnit(unit, temp);
+    }
+}
+void display(struct Unit *unit){
+    struct Words *tempIterator = unit->head;
+    while (tempIterator != NULL){
+        printf("%s --> %d;\n", tempIterator->word, tempIterator->count);
         tempIterator = tempIterator->next;
     }
-    if (tempIterator == NULL){
-        createNode(node, temp);
-    }
 }
-void popNode(struct Node *node, const char *wordRemove){
-    struct Words *neededToRemove = node->head;
-    while (neededToRemove != NULL){
-        if (strcmp(neededToRemove->word, wordRemove) == 0){
-            if (neededToRemove == node->head){
-                node->head = neededToRemove->next;
-                if (node->head != NULL){
-                    node->head->prev = NULL;
-                }
-            }else if (neededToRemove == node->tail){
-                node->tail = neededToRemove->prev;
-                if (node->tail != NULL){
-                    node->tail->next = NULL;
-                }
-            }else{
-                neededToRemove->prev->next = neededToRemove->next;
-                neededToRemove->next->prev = neededToRemove->prev;
-            }
-            free(neededToRemove);
-            node->size --;
-            return;
-        }
-        neededToRemove = neededToRemove->next;
+void deletingList(struct Unit *unit) {
+    struct Words *tempIterator = unit->head;
+    while (tempIterator != NULL){
+        struct Words *following = tempIterator->next;
+        free(tempIterator);
+        tempIterator = following;
     }
-}
-void freeList(struct Node *node){
-    struct Words *current = node->head;
-    while (current != NULL) {
-        struct Words *next = current->next;
-        free(current);
-        current = next;
-    }
-    node->head = NULL;
-    node->tail = NULL;
-    node->size = 0;
+    unit->size = 0;
+    unit->head = NULL;
+    unit->tail = NULL;
 }
