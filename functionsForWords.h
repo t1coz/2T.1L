@@ -4,8 +4,8 @@
 #include <string.h>
 #ifndef ARCHIVER_FUNCTIONSFORWORDS_H
 #define ARCHIVER_FUNCTIONSFORWORDS_H
-void createNode(struct Node *node,const  char *buffer);
-void addNode(struct Node *node, const char *temp);
-void popNode(struct Node *node, const char *wordRemove);
-void freeList(struct Node *node);
+void createUnit(struct Unit *unit, const char *buffer);
+void newNode(struct Unit *unit, const char *temp);
+void display(struct Unit *unit);
+void deletingList(struct Unit *unit);
 #endif
