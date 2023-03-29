@@ -27,179 +27,152 @@ void getStr(char **string){
 int cycleWord(const char *token, char *temp){
     int i = 0;
     for (int j = 0; token[j]; j++){
-        if (isalnum(token[j])) {
-            temp[i++] = token[j];
-        }
+        temp[i++] = (char)tolower(token[j]);
     }
     temp[i] = '\0';
     return i;
 }
-void readFile(struct Node *node, const char *fileName){
-    FILE *fp = fopen(fileName, "r");
-    if (fp == NULL) {
-        printf("Opening error.");
-        return;
+void readFile(struct Unit *unit, const char *filePath){
+    FILE *textFile = fopen(filePath, "r");
+    if (textFile == NULL) {
+        printf("textFile is NULL.\n");
+        exit(0);
     }
-    char *savingPtr;
-    char buffer[1000];
-    char temp[1000];
-    while (fgets(buffer, 1000, fp) != NULL){
+    char *savePtr;
+    char buffer[50];
+    char temp[50];
+    while (fscanf(textFile, "%s", buffer) != EOF){
         temp[0] = '\0';
-        const char *token = strtok_r(buffer, " \t\n", &savingPtr);
-        while (token != NULL){
+        const char *token = strtok_r(buffer, " \t\n", &savePtr);
+        while (token != NULL) {
             int i;
-            i = cycleWord(token, temp);
-            if (i > 0){
-                addNode(node, temp);
+            i = cycleWord(token,temp);
+            if (i > 0) {
+                newNode(unit,temp);
             }
-            token = strtok_r(NULL, " \t\n", &savingPtr);
+            token = strtok_r(NULL, " \t\n",&savePtr);
         }
     }
-    fclose(fp);
+    fclose(textFile);
 }
-char *findMaxLenPopularWord(const struct Node *node){
-    if (node == NULL || node->head == NULL)
+char* findMaxLenWord(const struct Unit *unit) {
+    if (unit == NULL || unit->head == NULL)
         return NULL;
     int maxCount = 0;
-    char *tempWord = NULL;
-    struct Words *tempIterator = node->head;
-    while (tempIterator != NULL){
-        if (strlen(tempIterator->word) > 3 && tempIterator->count >= maxCount){
+    char *tempArray = NULL;
+    struct Words *tempIterator = unit->head;
+    while (tempIterator != NULL) {
+        if (strlen(tempIterator->word) > 4 && tempIterator->count >= maxCount) {
             maxCount = tempIterator->count;
-            tempWord = tempIterator->word;
+            tempArray = tempIterator->word;
         }
         tempIterator = tempIterator->next;
     }
-
-    return tempWord;
+    if (tempArray == NULL)
+        return "tempArray is NULL";
+    return tempArray;
 }
-int getMaxCount(const struct Node *node){
+int getMaxCount(const struct Unit *unit){
     int maxCount = 0;
-    struct Words *tempIterator = node->head;
-    while (tempIterator != NULL) {
-        if (tempIterator->count > maxCount){
-            maxCount = tempIterator->count;
+    struct Words *tempIteration = unit->head;
+    while (tempIteration != NULL) {
+        if (tempIteration->count > maxCount) {
+            maxCount = tempIteration->count;
         }
-        tempIterator = tempIterator->next;
+        tempIteration = tempIteration->next;
     }
     return maxCount;
 }
-char *findMinLenRareWord(const struct Node *node){
-    if (node == NULL || node->head == NULL) return NULL;
-    int minCount = node->head->count + 1;
+char* findMinLenWord(const struct Unit *unit){
+    if (unit == NULL || unit->head == NULL)
+        return NULL;
+    int minCount = unit->head->count + 1;
     char *tempArray = NULL;
-    struct Words* tempIterator = node->head;
+    struct Words *tempIterator = unit->head;
     while (tempIterator != NULL) {
-        if (strlen(tempIterator->word) < 3 && tempIterator->count <= minCount &&
-            tempIterator->count < getMaxCount(node)) {
+        if (strlen(tempIterator->word) < 3 && tempIterator->count <= minCount && tempIterator->count < getMaxCount(unit)) {
             minCount = tempIterator->count;
             tempArray = tempIterator->word;
         }
         tempIterator = tempIterator->next;
     }
+    if (tempArray == NULL)
+        return "tempArray is NULL";
     return tempArray;
 }
-int getMinCount(const struct Node *node){
-    int minCount = node->head->count + 1;
-    struct Words *tempIterator = node->head;
-    while (tempIterator != NULL) {
-        if (tempIterator->count < minCount){
-            minCount = tempIterator->count;
-        }
-        tempIterator = tempIterator->next;
-    }
-    return minCount;
-}
-void deleteSymbol(char *temp){
-    while (strlen(temp) > 0 && !isalpha(temp[strlen(temp) - 1])
-    && (temp[strlen(temp) - 1] != '.' && temp[strlen(temp) - 1] != ',')){
+void deleteSymbol(char *temp) {
+    while (strlen(temp) > 0 && !isalpha(temp[strlen(temp) - 1]) &&
+    (temp[strlen(temp) - 1] != '.' && temp[strlen(temp) - 1] != ',')){
         temp[strlen(temp) - 1] = '\0';
     }
 }
-void checkTransitionToANewLine(char *temp, const char *token){
-    if (token[strlen(token) - 1] != '\n'){
+void checkTransitionToANewLine(char *temp, const char *token) {
+    int hasNewline = 0;
+    if (token[strlen(token) - 1] != '\n') {
         strcat(temp, " ");
     }else{
         temp[strlen(temp) - 1] = '\0';
+        hasNewline = 1;
+    }
+    if (token == NULL && !hasNewline) {
+        strcat(temp, "\n");
     }
 }
-void inputSpaces(const char *buffer, char *temp, int i){
+void inputSpaces(const char *buffer, char *temp, int i) {
     int numSpaces = 0;
     while (buffer[i] != '\0' && isspace(buffer[i])){
-        if (!isalpha(buffer[i])){
+        if (!isalpha(buffer[i])) {
             numSpaces++;
         }
         i++;
     }
-    for (int j = 0; j < numSpaces; j++){
+    for (int j = i; j < numSpaces; j++) {
         strcat(temp, " ");
     }
 }
-void token(char *buffer, char *temp, char **array, int size){
+void token(char *buffer, char *temp, const char *word, const char *nWord){
     char *savePtr;
     const char *token = strtok_r(buffer, " \t\n", &savePtr);
-    while (token != NULL) {
-        int founded = 0;
-        for (int i = 0; i < size; i += 2) {
-            if (strcmp(token, array[i]) == 0) {
-                founded = 1;
-                strcat(temp, array[i + 1]);
-            }else if (strcmp(token, array[i + 1]) == 0){
-                founded = 1;
-                strcat(temp, array[i]);
-            }
-            if (founded == 1)
-                break;
-        }
-        if (founded == 0) {
-            strcat(temp, token);
-        }
-        if (temp[0] != '\0') {
-            checkTransitionToANewLine(temp, token);
-        }
-        token = strtok_r(NULL, " \t\n", &savePtr);
-        if (token != NULL && token[0] == '\0') {
-            token = strtok_r(NULL, " \t\n", &savePtr);
-        }
-    }
-}
-char** fillingVocabulary(const char *filePath, struct Node *node, int *size){
-    FILE *initialFile = fopen(filePath, "r");
-    if (initialFile == NULL){
-        printf("Opening error.");
-        return NULL;
-    }
-    char* wordA;
-    char* wordB;
-    char** vocabularyWords = NULL;
-    printf("\n\033[0;34mWord pairs:\033[0m\n");
-    while (1){
-        if ((wordA = findMaxLenPopularWord(node)) == NULL)
-            break;
-        if ((wordB = findMinLenRareWord(node)) == NULL){
-            popNode(node, wordA);
+    while (token != NULL){
+        unsigned long len = strlen(token);
+        if (len == 0){
             continue;
         }
-        if (strlen(wordA) * getMaxCount(node) < strlen(wordB) * (getMinCount(node))){
-            fclose(initialFile);
-            return vocabularyWords;
+        char lastChar = token[len - 1];
+        if (!isalnum(lastChar)){
+            char *wordOnly = malloc(len);
+            strncpy(wordOnly, token, len - 1);
+            wordOnly[len - 1] = '\0';
+            if(strcmp(wordOnly, word) == 0){
+                strcat(temp, nWord);
+            }else if(strcmp(token, nWord) == 0) {
+                strcat(temp, word);
+            }else{
+                strcat(temp, token);
+            }
+            free(wordOnly);
+        }else{
+            if(strcmp(token, nWord) == 0) {
+                strcat(temp, word);
+            }else if(strcmp(token, word) == 0) {
+                strcat(temp, nWord);
+            }else{
+                strcat(temp, token);
+            }
         }
-        printf("%s --> %s;\n", wordA, wordB);
-        vocabularyWords = realloc(vocabularyWords, (*size + 2) * sizeof(char*));
-        vocabularyWords[*size] = strdup(wordA);
-        vocabularyWords[*size + 1] = strdup(wordB);
-        *size += 2;
-        popNode(node, wordA);
-        popNode(node, wordB);
+        checkTransitionToANewLine(temp, token);
+        token = strtok_r(NULL, " \t\n", &savePtr);
     }
-    fclose(initialFile);
-    return vocabularyWords;
 }
-int fileCompression(const char *fileName, struct Node *node){
-    FILE *initialFile = fopen(fileName, "r");
+int strangeCompression(const char *filePath, const char *word, const char *newWord){
+    if (word == NULL || newWord == NULL) {
+        printf("textFile is NULL.\n");
+        return 1;
+    }
+    FILE *initialFile = fopen(filePath, "r");
     FILE *compressedFile = fopen("compressedFile.txt", "w");
     if (initialFile == NULL || compressedFile == NULL) {
-        printf("Failed to open");
+        printf("Error during opening files in compression.");
         if (initialFile != NULL) {
             fclose(initialFile);
         }
@@ -208,17 +181,12 @@ int fileCompression(const char *fileName, struct Node *node){
         }
         return 1;
     }
-    int size = 0;
-    char **vocabularyWords = fillingVocabulary(fileName, node, &size);
-    for (int i = 0; i < size; i++) {
-        fprintf(compressedFile, "%s ", vocabularyWords[i]);
-    }
-    fprintf(compressedFile, "\n");
-    char buffer[4000];
-    while (fgets(buffer, 4000, initialFile) != NULL) {
-        char *temp = (char *) calloc(4000, sizeof(char));
+    fprintf(compressedFile, "%s %s ", word, newWord);
+    char buffer[1000];
+    while (fgets(buffer, 1000, initialFile) != NULL) {
+        char *temp = (char *) calloc(1000, sizeof(char));
         inputSpaces(buffer, temp, 0);
-        token(buffer, temp, vocabularyWords, size);
+        token(buffer, temp, word, newWord);
         deleteSymbol(temp);
         strcat(temp, "\n");
         temp = (char *) realloc(temp, (strlen(temp) + 2) * sizeof(char));
@@ -226,7 +194,6 @@ int fileCompression(const char *fileName, struct Node *node){
         free(temp);
     }
     fclose(initialFile);
-    free(vocabularyWords);
     fclose(compressedFile);
     return 0;
 }
