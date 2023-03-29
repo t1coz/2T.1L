@@ -6,7 +6,7 @@ struct Words{
     struct Words *prev;
     int count;
 };
-struct Node{
+struct Unit{
     int size;
     struct Words *head;
     struct Words *tail;
