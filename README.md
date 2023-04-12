@@ -1,2 +1,2 @@
 # 2T.1L
-Random lab (cur. 2).
+Random lab (cur. 3).
