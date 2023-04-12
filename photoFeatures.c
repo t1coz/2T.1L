@@ -40,8 +40,8 @@ void gammaCorrection(const BMPImage *image, unsigned int height, unsigned int  w
     }
 }
 int compareForMedian(const void *a, const void *b){
-    const int *aa = (int *)a;
-    const int *bb = (int *)b;
+    const int *aa = (const int *)a;
+    const int *bb = (const int *)b;
     return (*aa > *bb) - (*aa < *bb);
 }
 void medianFilter(const BMPImage *image, int frameSize, unsigned int height, unsigned int width){

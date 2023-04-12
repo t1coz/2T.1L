@@ -6,7 +6,7 @@
 #define INC_3LAB_FILEFUNCTIONS_H
 
 BMPImage *readBMPFile(const char *filePath);
-void writeBMP(const char *outputFilePath, const BMPImage *image);
+void writeBMP(const BMPImage *image);
 
 void freeStructure(BMPImage *image);
 #endif

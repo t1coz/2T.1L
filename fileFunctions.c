@@ -44,7 +44,7 @@ BMPImage *readBMPFile(const char *filePath){
     fclose(initialFile);
     return image;
 }
-void writeBMP(const char *outputFilePath, const BMPImage *image){
+void writeBMP(const BMPImage *image){
     FILE *outputFile = fopen("editedFile.bmp", "wb");
     if (outputFile == NULL) {
         printf("Error: Failed to open output file.");

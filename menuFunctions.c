@@ -32,31 +32,29 @@ void functionsSelection(const BMPImage *image, int choice){
         }
     }
 }
-void menuInterface(BMPImage *image, char* filePath){
+void menuInterface(BMPImage *image){
     if (image == NULL && !image){
         printf("\n\033[0;31mFinishing the program.\n\033[0m");
         free(image);
         exit(0);
     }
-//    while(1){
-        printf("\n\033[0;31mChoose what to do with the IMAGE:\033[0m"
-               "\n1. Convert to negative."
-               "\n2. Convert to monochrome."
-               "\n3. Implement median filtering."
-               "\n4. Implement gamma correction."
-               "\n\033[0;33m(Type 99 to exit the program)\033[0m\n"
-               "\n\033[0;32mDecision: \033[0m");
-        int choice;
-        choice = methodOfInput(4);
-        if (choice == 99){
-            printf("\n\033[0;31mFinishing the program.\n\033[0m");
-            freeStructure(image);
-            exit(0);
-        }
-        functionsSelection(image, choice);
-        writeBMP(filePath, image);
-        printf("\n\033[0;34mThe feature has been implemented.\033[0m\n");
-//    }
+    printf("\n\033[0;31mChoose what to do with the IMAGE:\033[0m"
+           "\n1. Convert to negative."
+           "\n2. Convert to monochrome."
+           "\n3. Implement median filtering."
+           "\n4. Implement gamma correction."
+           "\n\033[0;33m(Type 99 to exit the program)\033[0m\n"
+           "\n\033[0;32mDecision: \033[0m");
+    int choice;
+    choice = methodOfInput(4);
+    if (choice == 99){
+        printf("\n\033[0;31mFinishing the program.\n\033[0m");
+        freeStructure(image);
+        exit(0);
+    }
+    functionsSelection(image, choice);
+    writeBMP(image);
+    printf("\n\033[0;34mThe feature has been implemented.\033[0m\n");
 }
 int methodOfInput(int size){
     int num;
