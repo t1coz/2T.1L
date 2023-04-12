@@ -76,6 +76,10 @@ void medianFilter(const BMPImage *image, int frameSize, unsigned int height, uns
             unsigned int r[frameSize * frameSize];
             unsigned int g[frameSize * frameSize];
             unsigned int b[frameSize * frameSize];
+            memset(r, 0, frameSize * frameSize * sizeof(unsigned int));
+            memset(g, 0, frameSize * frameSize * sizeof(unsigned int));
+            memset(b, 0, frameSize * frameSize * sizeof(unsigned int));
+
             int k = 0;
             for (int ii = -pad; ii <= pad; ii++) {
                 for (int jj = -pad; jj <= pad; jj++) {
