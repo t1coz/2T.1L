@@ -7,6 +7,6 @@ int main() {
     char *filePath = NULL;
     getStr(&filePath);
     BMPImage *image = readBMPFile(filePath);
-    menuInterface(image, filePath);
+    menuInterface(image);
     return 0;
 }
