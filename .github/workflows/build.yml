@@ -1,10 +1,6 @@
 name: Build
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    types: [opened, synchronize, reopened]
+ workflow_dispatch
 jobs:
   build:
     name: Build
@@ -19,7 +15,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-c-cpp@v1
       - name: Run build-wrapper
         run: |
-          mkdir build
+          New-Item -ItemType directory -Path build
           cmake -S . -B build
           build-wrapper-macosx-x86 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Release
       - name: Run sonar-scanner
